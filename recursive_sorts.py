@@ -4,7 +4,7 @@
 # GitHub Copilot, TabNine, etc. when working on this file.
 # Writing a sorting algorithm yourself is the best
 # way to learn how it works.
-# Modified by: 
+# Modified by: Tristan Crawford
 from random import randint
 
 
