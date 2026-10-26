@@ -6,18 +6,15 @@
 # way to learn how it works.
 # Modified by: Tristan Crawford
 from random import randint
+ 
+ 
 
-
-# This function assumes both left and right are sorted
-# lists, each in ascending order
-# This is already done, don't modify it
 def merge(left, right):
-    # pre-allocate memory for the merged lists
     merged = [None] * (len(left) + len(right))
     left_index = 0
     right_index = 0
     merged_index = 0
-    # move the smallest element from left or right to merged
+
     while left_index < len(left) and right_index < len(right):
         if left[left_index] < right[right_index]:
             merged[merged_index] = left[left_index]
@@ -26,56 +23,41 @@ def merge(left, right):
             merged[merged_index] = right[right_index]
             right_index += 1
         merged_index += 1
-    # copy any remaining elements from left
+   
     while left_index < len(left):
         merged[merged_index] = left[left_index]
         left_index += 1
         merged_index += 1
-    # copy any remaining elements from right
+   
     while right_index < len(right):
         merged[merged_index] = right[right_index]
         right_index += 1
         merged_index += 1
     return merged
+ 
+ 
 
-
-# Sort a list in ascending order using the
-# merge sort algorithm including the provided
-# merge function above
-# lst[:] = ...
-# will replace all the elements in the list with 
-# whatever is on the right side of the = sign
-# Don't return anything, just replace the elements
-# in lst with the sorted elements
-  def merge_sort(lst):
+def merge_sort(lst):
     if len(lst) <= 1:
         return
     mid = len(lst) // 2
     left = lst[:mid]
     right = lst[mid:]
-
+ 
     merge_sort(left)
     merge_sort(right)
-
+ 
     lst[:] = merge(left, right)
+ 
+ 
 
-
-
-# Sorts a list in ascending order using the quicksort algorithm
-# between *start* and *end* inclusive
-# Meaning if we had a list like [5, 3, 8, 6, 2]
-# and we called quicksort_in_place(lst, 1, 3)
-# it would result in the list [5, 3, 6, 8, 2]
-# Please choose a random pivot index between
-# start and end inclusive using randint
-# Don't return anything, just sort lst in-place
-    def quicksort_in_place(lst, start, end):
+def quicksort_in_place(lst, start, end):
     if start >= end:
         return
    
     pivot_index = randint(start, end)
     lst[pivot_index], lst[end] = lst[end], lst[pivot_index]
-
+ 
     pivot = lst[end]
     boundary = start
    
@@ -85,25 +67,15 @@ def merge(left, right):
             boundary += 1
             
     lst[boundary], lst[end] = lst[end], lst[boundary]
-
+ 
     quicksort_in_place(lst, start, boundary - 1)
     quicksort_in_place(lst, boundary + 1, end)
-    # Here are some steps to follow
-    # 1. Think about the base case first
-    # 2. Choose a random pivot
-    # 3. Move the pivot to the end
-    # 4. Go through the list from stat to end moving
-    # items less than the pivot to one side
-    # 5. Move the pivot to between the "less than" and
-    # and "greater than" sides
-    # 6. Make the recursive calls one each partition
-
-# This is already done, don't modify it
+   
+ 
 def quicksort(lst):
     quicksort_in_place(lst, 0, len(lst) - 1)
-
-
-# This is already done, don't modify it
+ 
+ 
 def insertion_sort(lst):
     for i in range(1, len(lst)):
         key = lst[i]
@@ -112,27 +84,18 @@ def insertion_sort(lst):
             lst[j + 1] = lst[j]
             j -= 1
         lst[j + 1] = key
+ 
 
-
-# Perform a hybrid sort using the merge sort algorithm
-# (although not the merge sort function) for lists
-# larger than threshold, and insertion sort for lists
-# smaller than or equal to threshold
-# Sort in ascending order
-# See the note about [:] above merge_sort()
-# Don't return anything, just sort lst's items and replace them
-   def hybrid_sort(lst, threshold=10):
+def hybrid_sort(lst, threshold=10):
     if len(lst) <= threshold:
         insertion_sort(lst)
         return
-
+ 
     mid = len(lst) // 2
     left = lst[:mid]
     right = lst[mid:]
-
+ 
     hybrid_sort(left, threshold)
     hybrid_sort(right, threshold)
-
+ 
     lst[:] = merge(left, right)
-    
-
