@@ -58,7 +58,7 @@ def merge(left, right):
     merge_sort(right)
 
     lst[:] = merge(left, right)
-    pass
+
 
 
 # Sorts a list in ascending order using the quicksort algorithm
@@ -97,8 +97,6 @@ def merge(left, right):
     # 5. Move the pivot to between the "less than" and
     # and "greater than" sides
     # 6. Make the recursive calls one each partition
-    pass
-
 
 # This is already done, don't modify it
 def quicksort(lst):
@@ -137,4 +135,4 @@ def insertion_sort(lst):
 
     lst[:] = merge(left, right)
     
-    pass
+
